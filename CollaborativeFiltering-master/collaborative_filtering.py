@@ -2,9 +2,12 @@
 #!/usr/bin/env python
 # Implementation of collaborative filtering recommendation engine
 
-
-from recommendation_data import dataset
+import csv
+# from recommendation_data import dataset
 from math import sqrt
+import pymysql
+dataset = {}
+
 
 def similarity_score(person1,person2):
 	
@@ -111,6 +114,65 @@ def user_reommendations(person):
 	# returns the recommended items
 	recommendataions_list = [recommend_item for score,recommend_item in rankings]
 	return recommendataions_list
-		
 
-print user_reommendations('Toby')
+
+def import_dataset():
+	conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='bhavya', db='minor2',autocommit=True)
+	cur = conn.cursor()
+	conn.autocommit(True)
+
+	# booksRating = list(csv.reader(open("BX-Book-Ratings.csv",newline='', encoding="latin1"), delimiter = ';'))
+	# print (booksRating[1])
+	# counter = 0
+	# for b in booksRating:
+	# 	if (counter == 0):
+	# 		pass
+	# 	else :
+	# 		cur.execute("INSERT INTO books_rating VALUES (" + b[0] +",'" + b[1] +"'," + b[2] +");")
+	# 	counter += 1
+
+	# booksName = list(csv.reader(open("BX-Books.csv",newline='', encoding="latin1"), delimiter = ';'))
+	# counter = 0
+	# for b in booksName:
+	# 	if (counter == 0):
+	# 		pass
+	# 	else :
+	# 		cur.execute("INSERT INTO books_name VALUES ('%s', '%s', '%s', '%d', '%s')" % (b[0], b[1], b[2], b[3], b[4]))
+	# 		print (b[1])
+	# 	counter += 1
+	# print ("THE END *****************************************************************************")
+	
+	# usersData = list(csv.reader(open("BX-Users.csv",newline='', encoding="latin1"), delimiter = ';'))
+	# counter = 0
+	# str = ''
+	# for b in usersData:
+	# 	if (counter == 0):
+	# 		pass
+	# 	elif (counter == 100000):
+	# 		break
+	# 	else :
+	# 		str +=  "INSERT INTO user_details VALUES ('%d', '%s', '%s');" % (int(b[0]), b[1], b[2])
+	# 		print (b[0])
+	# 	counter += 1
+	# cur.execute(str)
+
+	cur.execute("SELECT * FROM user_details")
+	user_details_data = cur.fetchall()
+	# print(cur.fetchone())
+	for u in user_details_data:
+		userId = u[0]
+		dataset[str(userId)] = {}
+		# print (type(userId))
+		cur.execute("SELECT * FROM books_rating WHERE userid = %s", userId)
+		books_details_data = cur.fetchall()
+		for bdd in books_details_data:
+			dataset[str(userId)][bdd[1]] = bdd[2]
+	# print (dataset)
+	conn.close()
+
+	# print (booksName)
+	# mycsv = list(mycsv)
+
+
+import_dataset()
+print (user_reommendations('1557'))
