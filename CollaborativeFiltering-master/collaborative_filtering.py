@@ -2,9 +2,16 @@
 #!/usr/bin/env python
 # Implementation of collaborative filtering recommendation engine
 
-
-from recommendation_data import dataset
+import csv
+# from recommendation_data import dataset
 from math import sqrt
+import pymysql
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+
+dataset = {}
+
 
 def similarity_score(person1,person2):
 	
@@ -36,9 +43,12 @@ def pearson_correlation(person1,person2):
 
 	# To get both rated items
 	both_rated = {}
+	if (str(person1) == 8 and str(person2) == 11676):
+		print ("aajfkfbkwffkakfkjbka,dfbkffnakfnfankf")
 	for item in dataset[person1]:
 		if item in dataset[person2]:
 			both_rated[item] = 1
+	# pp.pprint(both_rated)
 
 	number_of_ratings = len(both_rated)		
 	
@@ -75,17 +85,19 @@ def most_similar_users(person,number_of_users):
 	scores.reverse()
 	return scores[0:number_of_users]
 
-def user_reommendations(person):
+def user_recommendations(person):
 
 	# Gets recommendations for a person by using a weighted average of every other user's rankings
 	totals = {}
 	simSums = {}
 	rankings_list =[]
 	for other in dataset:
+		# print(other)
 		# don't compare me to myself
 		if other == person:
 			continue
 		sim = pearson_correlation(person,other)
+		# print (sim)
 		#print ">>>>>>>",sim
 
 		# ignore scores of zero or lower
@@ -111,6 +123,81 @@ def user_reommendations(person):
 	# returns the recommended items
 	recommendataions_list = [recommend_item for score,recommend_item in rankings]
 	return recommendataions_list
-		
 
-print user_reommendations('Toby')
+
+def import_dataset():
+	conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='bhavya', db='minor2',autocommit=True)
+	cur = conn.cursor()
+	conn.autocommit(True)
+
+	# booksRating = list(csv.reader(open("BX-Book-Ratings.csv",newline='', encoding="latin1"), delimiter = ';'))
+	# print (booksRating[1])
+	# counter = 0
+	# for b in booksRating:
+	# 	if (counter == 0):
+	# 		pass
+	# 	else :
+	# 		cur.execute("INSERT INTO books_rating VALUES (" + b[0] +",'" + b[1] +"'," + b[2] +");")
+	# 	counter += 1
+
+	# booksName = list(csv.reader(open("BX-Books.csv",newline='', encoding="latin1"), delimiter = ';'))
+	# counter = 0
+	# for b in booksName:
+	# 	if (counter == 0):
+	# 		pass
+	# 	else :
+	# 		cur.execute("INSERT INTO books_name VALUES ('%s', '%s', '%s', '%d', '%s')" % (b[0], b[1], b[2], b[3], b[4]))
+	# 		print (b[1])
+	# 	counter += 1
+	# print ("THE END *****************************************************************************")
+	
+	# usersData = list(csv.reader(open("BX-Users.csv",newline='', encoding="latin1"), delimiter = ';'))
+	# counter = 0
+	# str = ''
+	# for b in usersData:
+	# 	if (counter == 0):
+	# 		pass
+	# 	elif (counter == 100000):
+	# 		break
+	# 	else :
+	# 		str +=  "INSERT INTO user_details VALUES ('%d', '%s', '%s');" % (int(b[0]), b[1], b[2])
+	# 		print (b[0])
+	# 	counter += 1
+	# cur.execute(str)
+
+
+
+
+	cur.execute("SELECT * FROM results ORDER BY userid ASC;")
+	user_details_data = cur.fetchall()
+	userid = 0
+	for u in user_details_data:
+		if (u[0] != userid):
+			dataset[str(u[0])] = {}
+			dataset[str(u[0])][u[1]] = u[2]
+			userid = u[0]
+		else:
+			dataset[str(u[0])][u[1]] = u[2]
+			userid = u[0]
+	pp.pprint(dataset)
+	# cur.execute("SELECT * FROM user_details LIMIT 100")
+	# user_details_data = cur.fetchall()
+	# # print(cur.fetchone())
+	# for u in user_details_data:
+	# 	userId = u[0]
+	# 	dataset[str(userId)] = {}
+	# 	# print (type(userId))
+	# 	cur.execute("SELECT * FROM books_rating WHERE userid = %s LIMIT 20000", userId)
+	# 	books_details_data = cur.fetchall()
+	# 	for bdd in books_details_data:
+	# 		dataset[str(userId)][bdd[1]] = bdd[2]
+	# 	print (u)
+	# pp.pprint (dataset)
+	conn.close()
+
+	# print (booksName)
+	# mycsv = list(mycsv)
+
+# pp.pprint (dataset)
+import_dataset()
+print(user_recommendations('8'))
