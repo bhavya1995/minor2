@@ -6,6 +6,10 @@ import csv
 # from recommendation_data import dataset
 from math import sqrt
 import pymysql
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+
 dataset = {}
 
 
@@ -39,9 +43,12 @@ def pearson_correlation(person1,person2):
 
 	# To get both rated items
 	both_rated = {}
+	if (str(person1) == 8 and str(person2) == 11676):
+		print ("aajfkfbkwffkakfkjbka,dfbkffnakfnfankf")
 	for item in dataset[person1]:
 		if item in dataset[person2]:
 			both_rated[item] = 1
+	# pp.pprint(both_rated)
 
 	number_of_ratings = len(both_rated)		
 	
@@ -78,17 +85,19 @@ def most_similar_users(person,number_of_users):
 	scores.reverse()
 	return scores[0:number_of_users]
 
-def user_reommendations(person):
+def user_recommendations(person):
 
 	# Gets recommendations for a person by using a weighted average of every other user's rankings
 	totals = {}
 	simSums = {}
 	rankings_list =[]
 	for other in dataset:
+		# print(other)
 		# don't compare me to myself
 		if other == person:
 			continue
 		sim = pearson_correlation(person,other)
+		# print (sim)
 		#print ">>>>>>>",sim
 
 		# ignore scores of zero or lower
@@ -156,23 +165,39 @@ def import_dataset():
 	# 	counter += 1
 	# cur.execute(str)
 
-	cur.execute("SELECT * FROM user_details")
+
+
+
+	cur.execute("SELECT * FROM results ORDER BY userid ASC;")
 	user_details_data = cur.fetchall()
-	# print(cur.fetchone())
+	userid = 0
 	for u in user_details_data:
-		userId = u[0]
-		dataset[str(userId)] = {}
-		# print (type(userId))
-		cur.execute("SELECT * FROM books_rating WHERE userid = %s", userId)
-		books_details_data = cur.fetchall()
-		for bdd in books_details_data:
-			dataset[str(userId)][bdd[1]] = bdd[2]
-	# print (dataset)
+		if (u[0] != userid):
+			dataset[str(u[0])] = {}
+			dataset[str(u[0])][u[1]] = u[2]
+			userid = u[0]
+		else:
+			dataset[str(u[0])][u[1]] = u[2]
+			userid = u[0]
+	pp.pprint(dataset)
+	# cur.execute("SELECT * FROM user_details LIMIT 100")
+	# user_details_data = cur.fetchall()
+	# # print(cur.fetchone())
+	# for u in user_details_data:
+	# 	userId = u[0]
+	# 	dataset[str(userId)] = {}
+	# 	# print (type(userId))
+	# 	cur.execute("SELECT * FROM books_rating WHERE userid = %s LIMIT 20000", userId)
+	# 	books_details_data = cur.fetchall()
+	# 	for bdd in books_details_data:
+	# 		dataset[str(userId)][bdd[1]] = bdd[2]
+	# 	print (u)
+	# pp.pprint (dataset)
 	conn.close()
 
 	# print (booksName)
 	# mycsv = list(mycsv)
 
-
+# pp.pprint (dataset)
 import_dataset()
-print (user_reommendations('1557'))
+print(user_recommendations('8'))
