@@ -126,7 +126,7 @@ def user_recommendations(person):
 
 
 def import_dataset():
-	conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='bhavya', db='minor2',autocommit=True)
+	conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='aanchal07', db='minor2',autocommit=True)
 	cur = conn.cursor()
 	conn.autocommit(True)
 
@@ -179,7 +179,7 @@ def import_dataset():
 		else:
 			dataset[str(u[0])][u[1]] = u[2]
 			userid = u[0]
-	pp.pprint(dataset)
+	#pp.pprint(dataset)
 	# cur.execute("SELECT * FROM user_details LIMIT 100")
 	# user_details_data = cur.fetchall()
 	# # print(cur.fetchone())
