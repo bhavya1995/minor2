@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+  <title>Book  recommender system</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="{{STATIC_URL}}js/jquery-1.11.1.min.js"></script>
+  <script src="{{STATIC_URL}}js/home.js"></script>
+</head>
+<style type="text/css">
+	.bgr{
+		background-image: url("{{STATIC_URL}}images/books.jpg");
+	}
+	.layer {
+    background-color: rgba(0, 0, 0, 0.88);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+	}
+	.text{
+	width: 500;
+    height: 500;
+    padding-right: 100;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+	}
+	.centered {
+  position: fixed; /* or absolute */
+  top: 30%;
+  left: 25%;
+}
+.para{
+	font-style: initial;
+    font-family: fantasy;
+    font-size: -webkit-xxx-large;
+    color: #fcf8e3;
+}
+.tboxcl{
+	width: 500;
+    height: 40;
+    margin-left: 60;
+    border: rgb(189, 184, 13);
+    border-width: thick;
+    border-style: solid;
+}
+.btncl{
+    color: #fff;
+    background-color: #BDB80D;
+    border-color: #eea236;
+    border-top: 70%;
+    padding-top: 10;
+    padding-bottom: 10;
+    padding-left: 30;
+    padding-right: 30;
+}
+#btndiv{
+	margin-left: 35%;
+    margin-top: 50;
+}
+
+</style>
+<body class="bgr">
+<div class="layer">
+<div class="text">
+<div class="centered">
+<p class="para"> PLEASE ENTER YOUR USER ID:</p><br><br>
+<form>
+<p><input type="text" name="Userid" placeholder="user id" class="tboxcl"></p>
+</form>
+<div id="btndiv"><button type="button" class="btncl">SUBMIT</button></div>
+</div>
+</div>
+</div>
+</body>
+</html>

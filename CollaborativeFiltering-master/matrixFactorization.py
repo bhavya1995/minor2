@@ -3,11 +3,15 @@ import csv
 from math import sqrt
 import pymysql
 import pprint
+import datetime
+
 try:
     import numpy
 except:
     print ("This implementation requires the numpy module.")
     exit(0)
+pp = pprint.PrettyPrinter(indent=4)
+
 
 """
 @INPUT:
@@ -36,6 +40,7 @@ def matrix_factorization(R, P, Q, K, steps=5000, alpha=0.0002, beta=0.02):
                         Q[k][j] = Q[k][j] + alpha * (2 * eij * P[i][k] - beta * Q[k][j])
         eR = numpy.dot(P,Q)
         e = 0
+      #  print ("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         for i in range(len(R)):
             for j in range(len(R[i])):
                 if R[i][j] > 0:
@@ -48,7 +53,7 @@ def matrix_factorization(R, P, Q, K, steps=5000, alpha=0.0002, beta=0.02):
 
 
 def import_dataset():
-    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='aanchal07', db='minor2',autocommit=True)
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='bhavya', db='minor2',autocommit=True)
     cur = conn.cursor()
     conn.autocommit(True)
 
@@ -87,6 +92,16 @@ def import_dataset():
     #print(userid[5])
     #print(bookid.index('0375759778'))
     #print(matrix[5][13])
+    matrixNew = []
+    counter = 0
+    for a in matrix:
+        if (counter == 10):
+            break
+        matrixNew.append(a)
+        counter += 1
+
+    matrix = matrixNew
+    print (matrix[0][0])
     matrix = numpy.array(matrix)
 
     N = len(matrix)
@@ -97,12 +112,21 @@ def import_dataset():
 
     P = numpy.random.rand(N,K)
     Q = numpy.random.rand(M,K)
-
+    prevDate = datetime.datetime.now()
     nP, nQ = matrix_factorization(matrix, P, Q, K)
     nR = numpy.dot(nP, nQ.T)
+    newDate = datetime.datetime.now()
     print("nP is\n" + str(nP))
     print("\nnQ is\n" + str(nQ))
-    print("\nnR is\n" + str(nR))
+    print("\nnR is\n" + str(nR.tolist()[0][0]))
+    print(str(prevDate) + " " + str(newDate))
+    rowCounter = 0
+    for row in nR.tolist():
+        colCounter = 0 
+        for col in row:
+            cur.execute("INSERT INTO matrix VALUES ('%d', '%s', '%lf')" % (userid[rowCounter], bookid[colCounter], col))
+            colCounter += 1
+        rowCounter += 1
     conn.close()
 
 

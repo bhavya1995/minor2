@@ -1,0 +1,142 @@
+<html lang="en">
+<head>
+  <title>Book  recommender system</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+</head>
+<style type="text/css">
+ .rating {
+          overflow: hidden;
+          display: inline-block;
+      }
+      .rating-input {
+          position: absolute;
+          left: 0;
+          top: -50px;
+      }
+      .rating-star {        
+          display: block;
+          float: right;        
+          width: 16px;
+          height: 16px;
+          background: url('http://kubyshkin.ru/samples/star-rating/star.png') 0 -16px;
+      }
+      .rating-star:hover,
+      .rating-star:hover ~ .rating-star,
+      .rating-input:checked ~ .rating-star {
+          background-position: 0 0;
+      }
+
+/* Just for the demo */
+.book1{
+	float: right;
+	width: 500px;
+}
+.names{
+	float: left;
+	width: 200px;
+}
+.fontsize{
+	font-size: 20;
+}
+#sec1{
+/*	height: 200;
+*/    background-color: rgba(63, 171, 27, 0.55);;
+    color: #6D087D;
+    font-size: 30;
+    padding-left: 10px;
+    padding-bottom: 20px;
+}
+.anandita{
+	padding-top: 30;
+	height: 250;
+    padding-left: 10px;
+}
+.greys:nth-child(2n+1){
+	background-color: rgba(185, 185, 168, 0.3);
+}
+
+.btnclass{
+    color: #fff;
+    background-color: #95D181;
+    border-color: #eea236;
+    border-top: 70%;
+    padding-top: 10;
+    padding-bottom: 10;
+    padding-left: 30;
+    padding-right: 30;
+}
+#btndivs{
+	margin-left: 35%;
+}
+.endcl{
+	padding-bottom: 50;
+    margin-left: 15%;
+}
+</style>
+<body>
+<section id="sec1">
+<div>
+	<p><br>Our database shows some books you have read in the past! Please rate them out of 10.</p>
+</div>
+</section>
+{% for a in data %}
+<section class="anandita greys">
+<img src="{{a.img}}">
+<div class="names">
+<p></p><p class="fontsize">{{a.bookName}}<br><p>By : {{a.author}}</p>
+</div>
+<div class="book1">
+<span class="rating">
+<legend>Please rate:</legend>
+        <input type="radio" class="rating-input"
+            id="rating-input-1-5a-{{a.id}}" name="rating-input-1a-{{a.id}}">
+        <label for="rating-input-1-5a-{{a.id}}" class="rating-star"></label>
+
+        <input type="radio" class="rating-input"
+            id="rating-input-1-4a-{{a.id}}" name="rating-input-1a-{{a.id}}">
+        <label for="rating-input-1-4a-{{a.id}}" class="rating-star"></label>
+
+        <input type="radio" class="rating-input"
+            id="rating-input-1-3a-{{a.id}}" name="rating-input-1a-{{a.id}}">
+        <label for="rating-input-1-3a-{{a.id}}" class="rating-star"></label>
+
+        <input type="radio" class="rating-input"
+            id="rating-input-1-2a-{{a.id}}" name="rating-input-1a-{{a.id}}">
+        <label for="rating-input-1-2a-{{a.id}}" class="rating-star"></label>
+
+        <input type="radio" class="rating-input"
+            id="rating-input-1-1a-{{a.id}}" name="rating-input-1a-{{a.id}}">
+        <label for="rating-input-1-1a-{{a.id}}" class="rating-star"></label>
+
+         <input type="radio" class="rating-input"
+            id="rating-input-1-5s-{{a.id}}" name="rating-input-1s-{{a.id}}">
+        <label for="rating-input-1-5s-{{a.id}}" class="rating-star"></label>
+
+        <input type="radio" class="rating-input"
+            id="rating-input-1-4s-{{a.id}}" name="rating-input-1s-{{a.id}}">
+        <label for="rating-input-1-4s-{{a.id}}" class="rating-star"></label>
+
+        <input type="radio" class="rating-input"
+            id="rating-input-1-3s-{{a.id}}" name="rating-input-1s-{{a.id}}">
+        <label for="rating-input-1-3s-{{a.id}}" class="rating-star"></label>
+
+        <input type="radio" class="rating-input"
+            id="rating-input-1-2s-{{a.id}}" name="rating-input-1s-{{a.id}}">
+        <label for="rating-input-1-2s-{{a.id}}" class="rating-star"></label>
+
+        <input type="radio" class="rating-input"
+            id="rating-input-1-1s-{{a.id}}" name="rating-input-1s-{{a.id}}">
+        <label for="rating-input-1-1s-{{a.id}}" class="rating-star"></label>
+    </span>
+    </div>
+    </section>
+    <br><br>
+    {% endfor %}
+    <section class="endcl">
+    	<div id="btndivs"><button type="button" class="btnclass">PROCEED</button></div>
+    </section>
+</body>
+</html>
