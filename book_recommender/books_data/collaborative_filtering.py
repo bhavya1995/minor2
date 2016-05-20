@@ -252,14 +252,14 @@ def import_dataset():
 	# mycsv = list(mycsv)
 
 # pp.pprint (dataset)
-import_dataset()
-nn = []
-for other in dataset:	
-	# print(other)
-	aa = cosineSimilarity(other)
-	if (len(aa) != 0):
-		nn.append(other)
-	print(nn)
+# import_dataset()
+# nn = []
+# for other in dataset:	
+# 	# print(other)
+# 	aa = cosineSimilarity(other)
+# 	if (len(aa) != 0):
+# 		nn.append(other)
+# 	print(nn)
 
 # # 	temp = similarity_score("201641", other)
 # # 	if (temp != 0):

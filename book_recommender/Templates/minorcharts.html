@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>
+      Chart
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="http://code.highcharts.com/highcharts.js" type="text/javascript"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(function() {
+  // Create the chart
+  $('#container').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Time taken by each algorithm'
+    },
+    subtitle: {
+      text: 'Runtime of each algorithm</a>.'
+    },
+    xAxis: {
+      type: 'category'
+    },
+    yAxis: {
+      title: {
+        text: 'time taken in seconds'
+      }
+
+    },
+    legend: {
+      enabled: false
+    },
+    plotOptions: {
+      series: {
+        borderWidth: 0,
+        dataLabels: {
+          enabled: true,
+          format: '{point.y:.1f} s'
+        }
+      }
+    },
+
+    tooltip: {
+      headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+    },
+
+    series: [{
+      name: 'Brands',
+      colorByPoint: true,
+      data: [{
+        name: 'pearson correlation',
+        y: 56.33,
+        drilldown: 'pearson correlation'
+      }, {
+        name: 'matrix factorization',
+        y: 24.03,
+        drilldown: 'matrix factorization'
+      }, {
+        name: 'cosine similarity',
+        y: 10.38,
+        drilldown: 'cosine similarity'
+      }]
+    }],
+    drilldown: {
+      series: [{
+        name: 'pearson correlation',
+        id: 'pearson correlation',
+        data: [
+          [
+            'v11.0',
+            24.13
+          ],
+          [
+            'v8.0',
+            17.2
+          ],
+          [
+            'v9.0',
+            8.11
+          ],
+          [
+            'v10.0',
+            5.33
+          ],
+          [
+            'v6.0',
+            1.06
+          ],
+          [
+            'v7.0',
+            0.5
+          ]
+        ]
+      }, {
+        name: 'matrix factorization',
+        id: 'matrix factorization',
+        data: [
+          [
+            'v40.0',
+            5
+          ],
+          [
+            'v41.0',
+            4.32
+          ],
+          [
+            'v42.0',
+            3.68
+          ],
+          [
+            'v39.0',
+            2.96
+          ],
+          [
+            'v36.0',
+            2.53
+          ],
+          [
+            'v43.0',
+            1.45
+          ],
+          [
+            'v31.0',
+            1.24
+          ],
+          [
+            'v35.0',
+            0.85
+          ],
+          [
+            'v38.0',
+            0.6
+          ],
+          [
+            'v32.0',
+            0.55
+          ],
+          [
+            'v37.0',
+            0.38
+          ],
+          [
+            'v33.0',
+            0.19
+          ],
+          [
+            'v34.0',
+            0.14
+          ],
+          [
+            'v30.0',
+            0.14
+          ]
+        ]
+      }, {
+        name: 'cosine similarity',
+        id: '',
+        data: [
+          [
+            'v35',
+            2.76
+          ],
+          [
+            'v36',
+            2.32
+          ],
+          [
+            'v37',
+            2.31
+          ],
+          [
+            'v34',
+            1.27
+          ],
+          [
+            'v38',
+            1.02
+          ],
+          [
+            'v31',
+            0.33
+          ],
+          [
+            'v33',
+            0.22
+          ],
+          [
+            'v32',
+            0.15
+          ]
+        ]
+
+      }]
+    }
+  });
+});
+</script>
+<script type="text/javascript">
+    $(function() {
+  // Create the chart
+  $('#contains').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'No. of books recommended by each algorithm'
+    },
+    subtitle: {
+      text: 'comparing no. of books recommended</a>.'
+    },
+    xAxis: {
+      type: 'category'
+    },
+    yAxis: {
+      title: {
+        text: 'no. of books recommended'
+      }
+
+    },
+    legend: {
+      enabled: false
+    },
+    plotOptions: {
+      series: {
+        borderWidth: 0,
+        dataLabels: {
+          enabled: true,
+          format: '{point.y:.1f}'
+        }
+      }
+    },
+
+    tooltip: {
+      headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+    },
+
+    series: [{
+      name: 'Brands',
+      colorByPoint: true,
+      data: [{
+        name: 'pearson correlation',
+        y: {{a}},
+        drilldown: 'pearson correlation'
+      }, {
+        name: 'matrix factorization',
+        y: {{c}},
+        drilldown: 'matrix factorization'
+      }, {
+        name: 'cosine similarity',
+        y: {{b}},
+        drilldown: 'cosine similarity'
+      }]
+    }],
+    drilldown: {
+      series: [{
+        name: 'pearson correlation',
+        id: 'pearson correlation',
+        data: [
+          [
+            'v11.0',
+            24.13
+          ],
+          [
+            'v8.0',
+            17.2
+          ],
+          [
+            'v9.0',
+            8.11
+          ],
+          [
+            'v10.0',
+            5.33
+          ],
+          [
+            'v6.0',
+            1.06
+          ],
+          [
+            'v7.0',
+            0.5
+          ]
+        ]
+      }, {
+        name: 'matrix factorization',
+        id: 'matrix factorization',
+        data: [
+          [
+            'v40.0',
+            5
+          ],
+          [
+            'v41.0',
+            4.32
+          ],
+          [
+            'v42.0',
+            3.68
+          ],
+          [
+            'v39.0',
+            2.96
+          ],
+          [
+            'v36.0',
+            2.53
+          ],
+          [
+            'v43.0',
+            1.45
+          ],
+          [
+            'v31.0',
+            1.24
+          ],
+          [
+            'v35.0',
+            0.85
+          ],
+          [
+            'v38.0',
+            0.6
+          ],
+          [
+            'v32.0',
+            0.55
+          ],
+          [
+            'v37.0',
+            0.38
+          ],
+          [
+            'v33.0',
+            0.19
+          ],
+          [
+            'v34.0',
+            0.14
+          ],
+          [
+            'v30.0',
+            0.14
+          ]
+        ]
+      }, {
+        name: 'cosine similarity',
+        id: '',
+        data: [
+          [
+            'v35',
+            2.76
+          ],
+          [
+            'v36',
+            2.32
+          ],
+          [
+            'v37',
+            2.31
+          ],
+          [
+            'v34',
+            1.27
+          ],
+          [
+            'v38',
+            1.02
+          ],
+          [
+            'v31',
+            0.33
+          ],
+          [
+            'v33',
+            0.22
+          ],
+          [
+            'v32',
+            0.15
+          ]
+        ]
+
+      }]
+    }
+  });
+});
+</script>
+</head>
+<body>
+    <div id="container" style="width: 600px; height: 400px; margin: 0 auto"></div>
+    <br><br><p><p><br>
+    <div id="contains" style="width: 600px; height: 400px; margin: 0 auto"></div>
+    <a href = "/finalcharts.html/?a={{a}}&b={{b}}&c={{c}}&d={{d}}&e={{e}}&f={{f}}"> <button type="button" class="btnclass btnc" style="padding: 20px;">PROCEED</button></a>
+
+</body>

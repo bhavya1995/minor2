@@ -22,4 +22,10 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'books_data.views.home'),
     url(r'^submitUserId/$', 'books_data.views.submitUserId'),
+    url(r'^algorithms.html/$', 'books_data.views.algorithms'),
+    url(r'^results.html/$', 'books_data.views.results1'),
+    url(r'^coockoo.html/$', 'books_data.views.coockoo'),
+    url(r'^minorcharts.html/$', 'books_data.views.minorcharts'),
+    url(r'^finalcharts.html/$', 'books_data.views.finalcharts'),
+
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

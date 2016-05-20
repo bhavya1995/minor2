@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>comparing the algos</title>
+   <style type="text/css">
+   .container{
+      display: flex;
+    /*align-items: center;*/
+   }
+   .div1{
+      /*height: 1500px;*/
+      width: 33.3%;
+      background-image: url('http://www.publicdomainpictures.net/pictures/40000/nahled/yellow-stripes-background.jpg');
+      /*opacity: 0.6;*/
+      border-right: 1px solid;
+      border-top: 1px solid;
+      border-color: black;
+   }
+   .div2{
+      /*height: 1500px;*/
+      width: 33.3%;
+      background-image: url('http://coolblackppt.com/wp-content/uploads/light-green-diagonal-stripes-background-seamless-300x300.gif');
+     border-right: 1px solid;
+     border-top: 1px solid;
+   }
+   .div3{
+      /*height: 1500px;*/
+      width: 33.3%;
+      background-image: url('http://www.commentnation.com/backgrounds/images/baby_blue_diagonal_stripes_background_seamless.gif');
+      border-top: 1px solid;
+   }
+   .footer{
+      /*height: 100px;*/
+      background-color: rgba(255, 192, 203, 0.35);
+   }
+   .header{
+      height:100px;
+      background-color: rgba(255, 192, 203, 0.35);
+   }
+   .btnclass {
+    color: #fff;
+    background-color: #95D181;
+    border-color: #eea236;
+    border-top: 70%;
+    padding-top: 10;
+    padding-bottom: 10;
+    padding-left: 30;
+    padding-right: 30;
+   }
+.btnc{
+   margin-left:45%;
+}
+   </style>
+</head>
+<body>
+<header class="header" style="font-size: xx-large;"><p style="margin-left: 30%;margin-top: 10px;">Recommendations for you!</p></header>
+<div class="container">
+<div class="div1">
+   <header><legend><h2 style="opacity: 1;">&nbsp; &nbsp;<u> Pearson correlation</u></header>
+   <p></p><br>
+   <p style="font-size: 18;color: red;"><i>The books recommended are:</i></p>
+   <br><br>
+   {% for d in data.pearson %}
+   <div>
+    <h3>&nbsp; &nbsp;{{d.bookName}}</h3>
+    <!-- <br> -->
+    <h4> &nbsp; &nbsp;&nbsp; &nbsp;  By - {{d.author}} </h4>
+    <!-- <br> -->
+    <img src = "{{d.img}}">
+  </div>
+  {% endfor %}
+</div>
+<div class="div2">
+   <header><legend><h2>&nbsp; &nbsp; <u>Cosine Similarity</u></header>
+   <p></p><br>
+   <p style="font-size: 18; color: red;"><i>The books recommended are:</i></p>
+   <br><br>
+   {% for d in data.cosine %}
+   <div>
+    <h3>&nbsp; &nbsp;{{d.bookName}}</h3>
+    <!-- <br> -->
+    <h4> &nbsp; &nbsp;&nbsp; &nbsp;  By - {{d.author}} </h4>
+    <!-- <br> -->
+    <img src = "{{d.img}}">
+  </div>
+  {% endfor %}
+</div>
+<div class="div3">
+   <header><legend><h2>&nbsp; &nbsp;<u> Matrix factorization</u></header>
+   <p></p><br>
+   <p style="font-size: 18; color: red;"><i>The books recommended are:</i></p>
+   <br><br>
+   {% for d in data.matrix %}
+   <div>
+   <h3>&nbsp; &nbsp;{{d.bookName}}</h3>
+    <!-- <br> -->
+    <h4> &nbsp; &nbsp;&nbsp; &nbsp;  By - {{d.author}} </h4>
+    <!-- <br> -->
+    <img src = "{{d.img}}">
+  </div>
+  {% endfor %}
+</div>
+</div>
+<div class="footer">
+<br>
+  <a href = "/coockoo.html/?userid={{userid}}&a={{a}}&b={{b}}&c={{c}}" <button type="button" class="btnclass btnc" style="padding: 20px;">PROCEED</button></a>
+</div>
+</body>
+</html>
