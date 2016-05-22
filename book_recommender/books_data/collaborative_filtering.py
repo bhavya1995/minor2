@@ -253,22 +253,27 @@ def import_dataset():
 
 # pp.pprint (dataset)
 # import_dataset()
-# nn = []
+# # nn = []
+# aada = []
 # for other in dataset:	
-# 	# print(other)
-# 	aa = cosineSimilarity(other)
-# 	if (len(aa) != 0):
-# 		nn.append(other)
-# 	print(nn)
+# # 	# print(other)
+# # 	aa = cosineSimilarity(other)
+# # 	if (len(aa) != 0):
+# # 		nn.append(other)
+# # 	print(nn)
 
-# # 	temp = similarity_score("201641", other)
-# # 	if (temp != 0):
-# # 		print (other + " " + str(temp))
-# # pp.pprint (most_similar_users("201641", 11962))
+# # # 	temp = similarity_score("201641", other)
+# # # 	if (temp != 0):
+# # # 		print (other + " " + str(temp))
+# # # pp.pprint (most_similar_users("201641", 11962))
 # 	abc = user_recommendations(other)
-# 	print (abc)
+# # 	print (abc)
 # 	if (len(abc) == 0):
 # 		pass
 # 	else:
-# 		print (other + "\n")
-# 		print(user_recommendations(other))
+# 		aada.append(other)
+# 	print(aada)
+
+# # 		print (other + "\n")
+# # 		print(user_recommendations(other))
+# print(aada)
