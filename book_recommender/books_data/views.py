@@ -16,8 +16,15 @@ def home(request):
 	return render(request,'minor.html')
 
 def submitUserId (request):
+	print("aaa")
 	userID = request.GET.get('userid')
 	books_arr = results.objects.filter(userId = int(userID))
+	tempArr = ['171968', '276071', '112093', '231354', '44842', '191883', '150498', '168064', '192353', '48046', '91058', '101304', '177432', '245568', '37244', '224997', '221445', '270234', '123608', '106078', '225989', '242233', '92810', '14521', '35998', '76532', '25545', '52917', '6563', '136747', '56856', '126736', '217375', '59038', '236757', '273976']
+	if (len(books_arr) == 0):
+		ran = random.randint(0, len(tempArr))
+		userID = tempArr[ran]
+		books_arr = results.objects.filter(userId = int(userID))
+
 	print(books_arr)
 	bookdata_arr = []
 	for b in books_arr:
@@ -27,12 +34,13 @@ def submitUserId (request):
 		try:
 			temp['id'] = bookObj[0].id
 			temp['bookName'] = bookObj[0].bookName
-			temp['img'] = bookObj[0].img2
+			temp['img'] = "/static/images/" + str(bookObj[0].bookId) + ".jpg"
 			temp['author'] = bookObj[0].bookAuthor
 			bookdata_arr.append(temp)
 		except:
 			pass
 	print(bookdata_arr)
+	print("aaaaaaaaaa")
 	return render(request, 'page2minor.html', {"data": bookdata_arr, "userid": userID})
 
 def algorithms(request):
@@ -55,11 +63,30 @@ def results1(request):
 		try:
 			temp['id'] = bookObj[0].id
 			temp['bookName'] = bookObj[0].bookName
-			temp['img'] = bookObj[0].img2
+			temp['img'] = "/static/images/" + str(bookObj[0].bookId) + ".jpg"
 			temp['author'] = bookObj[0].bookAuthor
 			bookdata_arr.append(temp)
 		except:
 			pass
+	if (len(bookdata_arr) == 0):
+		tempArr = ['171968', '276071', '112093', '231354', '44842', '191883', '150498', '168064', '192353', '48046', '91058', '101304', '177432', '245568', '37244', '224997', '221445', '270234', '123608', '106078', '225989', '242233', '92810', '14521', '35998', '76532', '25545', '52917', '6563', '136747', '56856', '126736', '217375', '59038', '236757', '273976']
+		bookdata_arr1 = user_recommendations(tempArr[random.randint(0, len(tempArr))])
+		bookdata_arr = []
+		for b in bookdata_arr1:
+			if (len(bookdata_arr) == 15):
+				break
+			temp = {}
+			bookObj = books_info.objects.filter(bookId = b)
+			# print(bookObj)
+			try:
+				temp['id'] = bookObj[0].id
+				temp['bookName'] = bookObj[0].bookName
+				temp['img'] = "/static/images/" + str(bookObj[0].bookId) + ".jpg"
+				temp['author'] = bookObj[0].bookAuthor
+				bookdata_arr.append(temp)
+			except:
+				pass
+
 	finalObj = {
 		'pearson': bookdata_arr
 	}
@@ -82,7 +109,7 @@ def results1(request):
 		try:
 			temp['id'] = bookObj[0].id
 			temp['bookName'] = bookObj[0].bookName
-			temp['img'] = bookObj[0].img2
+			temp['img'] = "/static/images/" + str(bookObj[0].bookId) + ".jpg"
 			temp['author'] = bookObj[0].bookAuthor
 			bookdata_arr.append(temp)
 		except:
@@ -103,7 +130,7 @@ def results1(request):
 		try:
 			temp['id'] = bookObj[0].id
 			temp['bookName'] = bookObj[0].bookName
-			temp['img'] = bookObj[0].img2
+			temp['img'] = "/static/images/" + str(bookObj[0].bookId) + ".jpg"
 			temp['author'] = bookObj[0].bookAuthor
 			print(temp)
 			prev = len(bookdata_arr)
@@ -138,7 +165,7 @@ def coockoo(request):
 		try:
 			temp['id'] = bookObj[0].id
 			temp['bookName'] = bookObj[0].bookName
-			temp['img'] = bookObj[0].img2
+			temp['img'] = "/static/images/" + str(bookObj[0].bookId) + ".jpg"
 			temp['author'] = bookObj[0].bookAuthor
 			print(temp)
 			# prev = len(bookdata_arr)
@@ -162,7 +189,7 @@ def coockoo(request):
 		try:
 			temp['id'] = bookObj[0].id
 			temp['bookName'] = bookObj[0].bookName
-			temp['img'] = bookObj[0].img2
+			temp['img'] = "/static/images/" + str(bookObj[0].bookId) + ".jpg"
 			temp['author'] = bookObj[0].bookAuthor
 			print(temp)
 			# prev = len(bookdata_arr)
@@ -184,7 +211,7 @@ def coockoo(request):
 		try:
 			temp['id'] = bookObj[0].id
 			temp['bookName'] = bookObj[0].bookName
-			temp['img'] = bookObj[0].img2
+			temp['img'] = "/static/images/" + str(bookObj[0].bookId) + ".jpg"
 			temp['author'] = bookObj[0].bookAuthor
 			print(temp)
 			# prev = len(bookdata_arr)
